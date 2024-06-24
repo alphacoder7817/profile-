@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Garvit Pandey - Tech Enthusiast</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Playfair+Display:wght@700&family=Montserrat:wght@300;400;700&family=Quicksand:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Montserrat', sans-serif;
+            background-color: #121212;
+            color: #e0e0e0;
+            overflow-x: hidden;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            transition: margin-left 0.3s;
+            position: relative;
+            z-index: 1;
+        }
+        h1 {
+            font-family: 'Quicksand', sans-serif;
+            font-size: 4.5em;
+            text-align: center;
+            margin-bottom: 30px;
+            color: #BB86FC;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        .section {
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: rgba(30, 30, 30, 0.6);
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+        .section h2 {
+            font-family: 'Playfair Display', serif;
+            margin-top: 0;
+            color: #03DAC6;
+        }
+        ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        li {
+            margin-bottom: 10px;
+        }
+        #particleCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+        .interactive {
+            cursor: pointer;
+        }
+        .interactive:hover {
+            transform: scale(1.02);
+        }
+        .sidebar {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            z-index: 2;
+            top: 0;
+            left: 0;
+            background-color: rgba(30, 30, 30, 0.9);
+            overflow-x: hidden;
+            transition: 0.3s;
+            padding-top: 60px;
+            backdrop-filter: blur(10px);
+        }
+        .sidebar a {
+            padding: 8px 8px 8px 32px;
+            text-decoration: none;
+            font-size: 18px;
+            color: #BB86FC;
+            display: block;
+            transition: 0.3s;
+        }
+        .sidebar a:hover {
+            background-color: rgba(44, 44, 44, 0.7);
+        }
+        .sidebar .closebtn {
+            position: absolute;
+            top: 0;
+            right: 25px;
+            font-size: 36px;
+            margin-left: 50px;
+        }
+        .openbtn {
+            font-size: 30px;
+            cursor: pointer;
+            background-color: rgba(30, 30, 30, 0.7);
+            color: #BB86FC;
+            padding: 10px 15px;
+            border: none;
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            z-index: 2;
+            backdrop-filter: blur(5px);
+        }
+        .openbtn:hover {
+            background-color: rgba(44, 44, 44, 0.7);
+        }
+        @media screen and (max-height: 450px) {
+            .sidebar {padding-top: 15px;}
+            .sidebar a {font-size: 18px;}
+        }
+        .loading-animation {
+            width: 100%;
+            height: 4px;
+            background-color: rgba(30, 30, 30, 0.7);
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+        .loading-bar {
+            height: 100%;
+            width: 0;
+            background-color: #BB86FC;
+            transition: width 0.5s ease;
+        }
+        .contact-link {
+            color: #03DAC6;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        .contact-link:hover {
+            color: #BB86FC;
+        }
+    </style>
+</head>
+<body>
+    <div class="loading-animation">
+        <div class="loading-bar"></div>
+    </div>
+
+    <div id="particleCanvas"></div>
+
+    <div id="mySidebar" class="sidebar">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="#about">About</a>
+        <a href="#education">Education</a>
+        <a href="#experience">Experience</a>
+        <a href="#skills">Skills</a>
+        <a href="#hobbies">Hobbies</a>
+        <a href="#contact">Contact</a>
+    </div>
+
+    <button class="openbtn" onclick="openNav()">☰</button>
+
+    <div class="container">
+        <h1>Garvit Pandey</h1>
+        
+        <div id="about" class="section interactive">
+            <h2>About Me</h2>
+            <p>I'm Garvit, a highly motivated and tech-savvy individual with a passion for continuous learning. I have a proven ability to rapidly acquire new skills and consistently exceed expectations in academic projects and extracurricular activities.</p>
+            <p>I'm team-oriented, collaborative, and have excellent communication and problem-solving skills. I'm eager to apply my technical aptitude and proactive mindset to contribute to a high-performing team and gain valuable real-world experience.</p>
+        </div>
+        
+        <div id="education" class="section interactive">
+            <h2>Education</h2>
+            <ul>
+                <li>Chhatrapati Shahu Ji Maharaj University (2023 - CURRENT)<br>Dr. Virendra Swarup Institute of Computer</li>
+                <li>Puranchandra Vidyaniketan<br>Highschool: 95%<br>Inter: 78% (1st Division)</li>
+            </ul>
+        </div>
+        
+        <div id="experience" class="section interactive">
+            <h2>Work Experience</h2>
+            <h3>ADITYA CYBERCAFE, KANPUR (February 2023 - April 2024)</h3>
+            <ul>
+                <li>Customer Service and Support: Ensured positive customer interactions and high satisfaction rates.</li>
+                <li>Technical Troubleshooting: Efficiently addressed and solved hardware and software issues on the spot, minimizing downtime.</li>
+                <li>Financial Management: Handled daily cash transactions accurately, contributing to a 100% error-free financial reconciliation record over six months.</li>
+                <li>Organizational Maintenance: Kept the cybercafe clean and well-organized, increasing customer visits due to improved ambiance and usability.</li>
+            </ul>
+        </div>
+        
+        <div id="skills" class="section interactive">
+            <h2>Skills</h2>
+            <ul>
+                <li>Technical Skills: Proficient in basic troubleshooting and problem-solving, experienced with maintaining computer systems</li>
+                <li>Interpersonal Skills: Strong communication abilities, excellent customer service skills</li>
+                <li>Management Skills: Financial transaction handling, effective organizational practices</li>
+            </ul>
+        </div>
+        
+        <div id="hobbies" class="section interactive">
+            <h2>Hobbies</h2>
+            <ul>
+                <li>Music listening</li>
+                <li>Light Reading</li>
+                <li>Learning About New Tech</li>
+            </ul>
+        </div>
+        
+        <div id="contact" class="section interactive">
+            <h2>Get in Touch</h2>
+            <p>Want to collaborate on a project or just chat about the latest tech trends? Reach out!</p>
+            <p>Phone: <a href="tel:638818245" class="contact-link">638818245</a></p>
+            <p>Email: <a href="mailto:gavit.7817@gmail.com" class="contact-link">gavit.7817@gmail.com</a></p>
+        </div>
+    </div>
+
+    <script>
+        let particles = [];
+
+        function setup() {
+            let canvas = createCanvas(windowWidth, windowHeight);
+            canvas.parent('particleCanvas');
+            for (let i = 0; i < 150; i++) {
+                particles.push(new Particle());
+            }
+        }
+
+        function draw() {
+            clear();
+            for (let particle of particles) {
+                particle.update();
+                particle.display();
+            }
+        }
+
+        class Particle {
+            constructor() {
+                this.pos = createVector(random(width), random(height));
+                this.vel = createVector(random(-1, 1), random(-1, 1));
+                this.size = random(5, 15);
+                this.color = color(random([
+                    '#BB86FC',
+                    '#03DAC6',
+                    '#CF6679',
+                    '#FFB74D',
+                    '#4FC3F7',
+                    '#81C784'
+                ]));
+                this.color.setAlpha(200);
+            }
+
+            update() {
+                this.pos.add(this.vel);
+                if (this.pos.x < 0 || this.pos.x > width) this.vel.x *= -1;
+                if (this.pos.y < 0 || this.pos.y > height) this.vel.y *= -1;
+            }
+
+            display() {
+                noStroke();
+                fill(this.color);
+                ellipse(this.pos.x, this.pos.y, this.size);
+            }
+        }
+
+        function windowResized() {
+            resizeCanvas(windowWidth, windowHeight);
+        }
+
+        const colors = [
+            'rgba(187, 134, 252, 0.6)',
+            'rgba(3, 218, 198, 0.6)',
+            'rgba(207, 102, 121, 0.6)',
+            'rgba(255, 183, 77, 0.6)',
+            'rgba(79, 195, 247, 0.6)',
+            'rgba(129, 199, 132, 0.6)'
+        ];
+
+        document.querySelectorAll('.interactive').forEach(el => {
+            el.addEventListener('click', () => {
+                let newColor;
+                do {
+                    newColor = colors[Math.floor(Math.random() * colors.length)];
+                } while (newColor === el.style.backgroundColor);
+                
+                el.style.backgroundColor = newColor;
+                let titleColor = newColor === 'rgba(3, 218, 198, 0.6)' ? '#121212' : '#e0e0e0';
+                el.querySelector('h2').style.color = titleColor;
+            });
+        });
+
+        function openNav() {
+            document.getElementById("mySidebar").style.width = "250px";
+            document.getElementsByClassName("container")[0].style.marginLeft = "250px";
+        }
+
+        function closeNav() {
+            document.getElementById("mySidebar").style.width = "0";
+            document.getElementsByClassName("container")[0].style.marginLeft = "0";
+        }
+
+        document.querySelectorAll('.sidebar a').forEach(link => {
+            link.addEventListener('click', closeNav);
+        });
+
+        window.addEventListener('load', () => {
+            const loadingBar = document.querySelector('.loading-bar');
+            loadingBar.style.width = '100%';
+            setTimeout(() => {
+                document.querySelector('.loading-animation').style.display = 'none';
+            }, 500);
+        });
+    </script>
+</body>
+</html>
