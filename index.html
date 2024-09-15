@@ -7,11 +7,26 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@700&family=Merriweather:wght@700&family=Playfair+Display:wght@700&family=Dancing+Script:wght@700&family=Pacifico&family=Architects+Daughter&family=Cinzel:wght@900&family=Raleway:wght@100&family=Quicksand:wght@300&family=Lobster&family=Press+Start+2P&family=Bungee+Shade&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=MuseoModerno:wght@100..900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Syne+Mono&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Kode+Mono&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Monofett&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=SUSE&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Playwrite+CU&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans&display=swap'); 
+        @import url('https://fonts.googleapis.com/css2?family=Silkscreen&display=swap');
+	@import url('https://fonts.googleapis.com/css2?family=Kode+Mono:wght@400..700&display=swap');
+
         body, html {
             margin: 0;
             padding: 0;
-            font-family: 'Montserrat', sans-serif;
-            background-color: #121212;
+            font-family: "Kode Mono", monospace;
+            background-color: #000000;
             color: #e0e0e0;
             overflow-x: hidden;
         }
@@ -23,13 +38,22 @@
             position: relative;
             z-index: 1;
         }
+        .title-container {
+            background-color: rgba(40, 40, 40, 0.7);
+            backdrop-filter: blur(15px);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            cursor: pointer;
+            transition: all 0.7s ease;
+        }
         h1 {
-            font-family: 'Quicksand', sans-serif;
             font-size: 4.5em;
             text-align: center;
-            margin-bottom: 30px;
-            color: #BB86FC;
+            margin: 0;
+            color: #ffffff;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            transition: all 0.3s ease;
         }
         .section {
             margin-bottom: 30px;
@@ -43,7 +67,7 @@
         .section h2 {
             font-family: 'Playfair Display', serif;
             margin-top: 0;
-            color: #03DAC6;
+            color: #4ECDC4;
         }
         ul {
             list-style-type: none;
@@ -83,7 +107,7 @@
             padding: 8px 8px 8px 32px;
             text-decoration: none;
             font-size: 18px;
-            color: #BB86FC;
+            color: #4ECDC4;
             display: block;
             transition: 0.3s;
         }
@@ -101,7 +125,7 @@
             font-size: 30px;
             cursor: pointer;
             background-color: rgba(30, 30, 30, 0.7);
-            color: #BB86FC;
+            color: #4ECDC4;
             padding: 10px 15px;
             border: none;
             position: fixed;
@@ -129,16 +153,16 @@
         .loading-bar {
             height: 100%;
             width: 0;
-            background-color: #BB86FC;
+            background-color: #4ECDC4;
             transition: width 0.5s ease;
         }
         .contact-link {
-            color: #03DAC6;
+            color: #4ECDC4;
             text-decoration: none;
             transition: color 0.3s ease;
         }
         .contact-link:hover {
-            color: #BB86FC;
+            color: #FF6B6B;
         }
     </style>
 </head>
@@ -150,7 +174,7 @@
     <div id="particleCanvas"></div>
 
     <div id="mySidebar" class="sidebar">
-        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
         <a href="#about">About</a>
         <a href="#education">Education</a>
         <a href="#experience">Experience</a>
@@ -162,7 +186,9 @@
     <button class="openbtn" onclick="openNav()">☰</button>
 
     <div class="container">
-        <h1>Garvit Pandey</h1>
+        <div class="title-container">
+            <h1>Garvit Pandey</h1>
+        </div>
         
         <div id="about" class="section interactive">
             <h2>About Me</h2>
@@ -235,47 +261,148 @@
         }
 
         class Particle {
-            constructor() {
-                this.pos = createVector(random(width), random(height));
-                this.vel = createVector(random(-1, 1), random(-1, 1));
-                this.size = random(5, 15);
-                this.color = color(random([
-                    '#BB86FC',
-                    '#03DAC6',
-                    '#CF6679',
-                    '#FFB74D',
-                    '#4FC3F7',
-                    '#81C784'
-                ]));
-                this.color.setAlpha(200);
-            }
+    constructor() {
+        this.pos = createVector(random(width), random(height));
+        this.vel = createVector(random(-1, 1), random(-1, 1));
+        this.size = random(10, 30);
+        this.color = color(random(shapeColors)); // Using the colors array you defined
+        this.shapeType = random(['hexagon', 'circle', 'triangle', 'wavyLine', 'wavyCircle']);
+        this.isOutline = random() > 0.5; // Determine if the shape should be an outline or filled
+    }
 
-            update() {
-                this.pos.add(this.vel);
-                if (this.pos.x < 0 || this.pos.x > width) this.vel.x *= -1;
-                if (this.pos.y < 0 || this.pos.y > height) this.vel.y *= -1;
-            }
+    update() {
+        this.pos.add(this.vel);
+        if (this.pos.x < 0 || this.pos.x > width) this.vel.x *= -1;
+        if (this.pos.y < 0 || this.pos.y > height) this.vel.y *= -1;
+    }
 
-            display() {
+    display() {
+        push();
+        translate(this.pos.x, this.pos.y);
+        rotate(frameCount / 200); // You can adjust rotation speed if needed
+
+        if (this.shapeType === 'hexagon') {
+            // Hexagon drawing code
+            if (this.isOutline) {
+                stroke(this.color);
+                noFill();
+            } else {
                 noStroke();
                 fill(this.color);
-                ellipse(this.pos.x, this.pos.y, this.size);
             }
-        }
+            beginShape();
+            for (let i = 0; i < 6; i++) {
+                let angle = TWO_PI / 6 * i;
+                let sx = cos(angle) * this.size;
+                let sy = sin(angle) * this.size;
+                vertex(sx, sy);
+            }
+            endShape(CLOSE);
+
+        } else if (this.shapeType === 'circle') {
+            // Circle drawing code
+            if (this.isOutline) {
+                stroke(this.color);
+                noFill();
+            } else {
+                noStroke();
+                fill(this.color);
+            }
+            ellipse(0, 0, this.size, this.size);
+
+        } else if (this.shapeType === 'triangle') {
+            // Triangle drawing code
+            if (this.isOutline) {
+                stroke(this.color);
+                noFill();
+            } else {
+                noStroke();
+                fill(this.color);
+            }
+            triangle(0, -this.size, -this.size * 0.866, this.size / 2, this.size * 0.866, this.size / 2);
+
+        } else if (this.shapeType === 'wavyLine') {
+            // Wavy line drawing code
+            stroke(this.color);
+            noFill();
+            beginShape();
+            for (let x = -this.size; x <= this.size; x++) {
+                let y = sin(x * 0.2) * this.size / 4; // Adjust amplitude and frequency as needed
+                vertex(x, y);
+            }
+            endShape();
+
+        } 
+        else if (this.shapeType === 'wavyCircle') {
+            // Wavy circle drawing code (modified for a smoother, more circular shape)
+            stroke(this.color);
+            noFill();
+            beginShape();
+            let n = 10; // Number of waves
+            let a = 45; // Angle for curvature (in degrees)
+            for (let i = 0; i < TWO_PI; i += 0.1) {
+                let r = this.size / 2 + sin(i * n) * this.size / (4 * n); // Adjust amplitude and frequency
+                let x = r * cos(i + radians(a)); 
+                let y = r * sin(i + radians(a));
+                vertex(x, y);
+            }
+            endShape(CLOSE);        }
+        pop();
+    }
+}
 
         function windowResized() {
             resizeCanvas(windowWidth, windowHeight);
         }
 
-        const colors = [
-            'rgba(187, 134, 252, 0.6)',
-            'rgba(3, 218, 198, 0.6)',
-            'rgba(207, 102, 121, 0.6)',
-            'rgba(255, 183, 77, 0.6)',
-            'rgba(79, 195, 247, 0.6)',
-            'rgba(129, 199, 132, 0.6)'
-        ];
+       const colors = [
+    'rgba(48, 155, 126, 0.8)',   // Darker Teal
+    'rgba(205, 57, 57, 0.8)',   // Darker Red
+    'rgba(205, 180, 59, 0.8)',   // Darker Yellow
+    'rgba(29, 133, 159, 0.8)',   // Darker Blue
+    'rgba(205, 100, 36, 0.8)',    // Darker Orange
+    'rgba(108, 0, 171, 0.8)',    // Darker Violet
+    'rgba(45, 0, 100, 0.8)',     // Darker Indigo
+    'rgba(0, 0, 205, 0.8)',      // Darker Blue
+    'rgba(205, 205, 0, 0.6)',    // Darker Yellow
+    'rgba(205, 115, 0, 0.8)',    // Darker Orange
+    'rgba(205, 0, 0, 0.8)',      // Darker Red
+    'rgba(98, 0, 98, 0.8)',    // Darker Purple
+    'rgba(0, 205, 0, 0.6)',      // Darker Lime
+    'rgba(0, 205, 205, 0.8)',    // Darker Cyan
+    'rgba(205, 0, 107, 0.8)',   // Darker Deep Pink
+    'rgba(205, 142, 153, 0.8)',   // Darker Pink
+    'rgba(205, 90, 0, 0.8)',    // Darker Dark Orange
+    'rgba(134, 84, 0, 0.8)',   // Darker Dark Goldenrod
+    'rgba(139, 133, 57, 0.8)',   // Darker Dark Khaki
+    'rgba(99, 39, 0, 0.8)',    // Darker Saddle Brown
+    'rgba(160, 55, 0, 0.8)',   // Darker Chocolate
+    'rgba(194, 114, 46, 0.8)',   // Darker Sandy Brown
+    'rgba(168, 115, 0, 0.8)'    // Darker Goldenrod
+];
 
+const shapeColors = [
+    'rgba(255, 0, 0, 0.6)',      // Lighter Red
+    'rgba(0, 255, 0, 0.6)',      // Lighter Lime
+    'rgba(0, 0, 255, 0.6)',      // Lighter Blue
+    'rgba(255, 255, 0, 0.4)',    // Lighter Yellow
+    'rgba(255, 0, 255, 0.6)',    // Lighter Magenta
+    'rgba(0, 255, 255, 0.6)',    // Lighter Cyan
+    'rgba(255, 165, 0, 0.6)',    // Lighter Orange
+    'rgba(128, 0, 128, 0.6)',    // Lighter Purple
+    'rgba(255, 20, 147, 0.6)',   // Lighter Deep Pink
+    'rgba(0, 128, 128, 0.6)',    // Lighter Teal
+    'rgba(255, 69, 0, 0.6)',     // Lighter Orange Red
+    'rgba(124, 252, 0, 0.6)',    // Lighter Lawn Green
+    'rgba(0, 191, 255, 0.6)',    // Lighter Deep Sky Blue
+    'rgba(255, 250, 205, 0.6)',   // Lighter Lemon Chiffon
+    'rgba(255, 105, 180, 0.6)',   // Lighter Hot Pink
+    'rgba(255, 228, 196, 0.6)',   // Lighter Bisque
+    'rgba(175, 238, 238, 0.6)',   // Lighter Pale Turquoise
+    'rgba(255, 255, 224, 0.6)',   // Lighter Light Yellow
+    'rgba(255, 218, 185, 0.6)',   // Lighter Peach Puff
+    'rgba(250, 250, 210, 0.6)'   // Lighter Light Goldenrod Yellow
+];
         document.querySelectorAll('.interactive').forEach(el => {
             el.addEventListener('click', () => {
                 let newColor;
@@ -284,19 +411,19 @@
                 } while (newColor === el.style.backgroundColor);
                 
                 el.style.backgroundColor = newColor;
-                let titleColor = newColor === 'rgba(3, 218, 198, 0.6)' ? '#121212' : '#e0e0e0';
+                let titleColor = newColor === 'rgba(247, 255, 247, 0.6)' ? '#121212' : '#e0e0e0';
                 el.querySelector('h2').style.color = titleColor;
             });
         });
 
         function openNav() {
             document.getElementById("mySidebar").style.width = "250px";
-            document.getElementsByClassName("container")[0].style.marginLeft = "250px";
+            document.querySelector('.container').style.marginLeft = "250px";
         }
 
         function closeNav() {
             document.getElementById("mySidebar").style.width = "0";
-            document.getElementsByClassName("container")[0].style.marginLeft = "0";
+            document.querySelector('.container').style.marginLeft = "0";
         }
 
         document.querySelectorAll('.sidebar a').forEach(link => {
@@ -309,6 +436,40 @@
             setTimeout(() => {
                 document.querySelector('.loading-animation').style.display = 'none';
             }, 500);
+        });
+
+        // Updated title interaction code with new fonts
+        const titleContainer = document.querySelector('.title-container');
+        const title = document.querySelector('h1');
+        const fonts = [
+            { family: "'Noto Sans JP', sans-serif", weight: "700", style: "normal", size: "4.5em" },
+            { family: "'Bodoni Moda', serif", weight: "900", style: "italic", size: "4em" },
+            { family: "'MuseoModerno', cursive", weight: "400", style: "normal", size: "5em" },
+            { family: "'VT323', monospace", weight: "400", style: "normal", size: "3.8em" },
+            { family: "'Syne Mono', monospace", weight: "700", style: "normal", size: "4em" },
+            { family: "'Kode Mono', monospace", weight: "500", style: "normal", size: "4.2em" },
+            { family: "'Monofett', monospace", weight: "400", style: "normal", size: "4.5em" },
+            { family: "'Poppins', sans-serif", weight: "600", style: "normal", size: "4.5em" },
+            { family: "'SUSE', sans-serif", weight: "700", style: "normal", size: "4.8em" },
+            { family: "'Playwrite CU', serif", weight: "400", style: "normal", size: "5em" },
+            { family: "'Pixelify Sans', sans-serif", weight: "400", style: "normal", size: "4em" },
+            { family: "'Silkscreen', cursive", weight: "400", style: "normal", size: "3.5em" } 
+        ];
+        let currentFontIndex = 0;
+
+        titleContainer.addEventListener('click', () => {
+            currentFontIndex = (currentFontIndex + 1) % fonts.length;
+            const font = fonts[currentFontIndex];
+            title.style.fontFamily = font.family;
+            title.style.fontWeight = font.weight;
+            title.style.fontStyle = font.style;
+            title.style.fontSize = font.size;
+            
+            // Add a subtle scale effect
+            titleContainer.style.transform = 'scale(1.05)';
+            setTimeout(() => {
+                titleContainer.style.transform = 'scale(1)';
+            }, 200);
         });
     </script>
 </body>
